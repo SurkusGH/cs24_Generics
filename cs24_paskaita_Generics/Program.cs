@@ -41,8 +41,16 @@ namespace cs24_paskaita_Generics
             MyList.AddElement(10d);
             MyList.AddElement(15d);
             MyList.AddElement(20d);
+            MyList.AddElement(25d);
+            MyList.AddElement(30d);
 
-            MyList.RemoveElement(1, 0); // <-- LABAI blogai, nors funkciją kind-of atlieka, bet čia reikia for'ą prasileisti kažkaip
+            MyList.PrintList();
+
+            //MyList.RemoveElement(1, 0); // <-- LABAI blogai, nors funkciją kind-of atlieka, bet čia reikia for'ą prasileisti kažkaip
+            MyList.RemoveElementAt(2);
+
+            MyList.PrintList();
+
 
         }
         #region Dėstytojo PVZ
@@ -233,6 +241,37 @@ namespace cs24_paskaita_Generics
             public void RemoveElement(int index, T value)
             {
                 Array[index] = value;   
+            }
+            public bool CheckIfEqual(int index, int i)
+            {
+                return (i == index);
+            }
+            public T[] RemoveElementAt(int index)
+            {
+                var newArray = new T[Size];
+                int j = 0;
+                for (int i = 0; i < Array.Length; i++)
+                {
+                    if (CheckIfEqual(index-1, i))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        newArray[j] = Array[i];
+                        j++;
+                    }
+                }
+                newArray.CopyTo(Array, 0);
+                return Array;
+            }
+
+            public void PrintList()
+            {
+                foreach (var item in Array)
+                {
+                    Console.WriteLine(item);
+                }
             }
         }
         #endregion
